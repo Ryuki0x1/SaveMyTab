@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaveMyTab - Settings & Memory Preferences</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Sidebar / Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4v10h16V8H4zm6 2h4v2h-4v-2zm0 4h4v2h-4v-2z"/>
+          </svg>
+        </div>
+        <span class="brand-title">SaveMyTab</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#general" class="nav-item active">General Settings</a>
+        <a href="#exclusions" class="nav-item">Smart Exclusions</a>
+        <a href="#pertab" class="nav-item">Per-Tab Overrides</a>
+        <a href="#whitelist" class="nav-item">Domain Whitelist</a>
+        <a href="#diagnostics" class="nav-item">Lifetime RAM Stats</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="content-header">
+        <h1>Extension Preferences</h1>
+        <p class="subtitle">Configure how and when inactive tabs are automatically unloaded to preserve system RAM.</p>
+      </header>
+
+      <!-- Section: Inactivity Timer -->
+      <section class="settings-card" id="general">
+        <h2>Global Inactivity Suspension Timer</h2>
+        <p class="card-desc">Default idle duration before tabs are unloaded from system memory. You can also override this for individual tabs via the toolbar popup.</p>
+
+        <div class="form-group">
+          <label for="preset-buttons">Unload tabs inactive for:</label>
+          <div class="preset-buttons" id="preset-buttons">
+            <button type="button" class="preset-btn" data-val="5">5 min</button>
+            <button type="button" class="preset-btn" data-val="10">10 min</button>
+            <button type="button" class="preset-btn active" data-val="15">15 min</button>
+            <button type="button" class="preset-btn" data-val="30">30 min</button>
+            <button type="button" class="preset-btn" data-val="60">1 hour</button>
+            <button type="button" class="preset-btn" data-val="120">2 hours</button>
+          </div>
+
+          <div class="custom-timeout-row">
+            <span>Or custom default duration:</span>
+            <input type="number" id="custom-timeout-input" min="1" max="1440" value="15">
+            <span>minutes</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="check-interval-input">Background evaluation check frequency:</label>
+          <div class="input-inline">
+            <input type="number" id="check-interval-input" min="1" max="60" value="1">
+            <span>minute(s) (Checks tabs periodically in the background)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Smart Exclusions & Behavior -->
+      <section class="settings-card" id="exclusions">
+        <h2>Global Tab Protection & Exclusions</h2>
+        <p class="card-desc">Prevent tabs from being unloaded unexpectedly across all windows.</p>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <div class="switch-title">Protect Active Tab from Automatic Unload</div>
+            <div class="switch-desc">Never unload the tab you are currently viewing or interacting with.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="protect-active" checked disabled>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <div class="switch-title">Protect Tabs Playing Audio or Video</div>
+            <div class="switch-desc">Prevent background music, podcasts, YouTube streams, or conference calls from cutting off.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="protect-audio" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <div class="switch-title">Protect Pinned Tabs</div>
+            <div class="switch-desc">Keep pinned tabs permanently loaded in memory.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="protect-pinned" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <div class="switch-title">Show Suspended Count Badge</div>
+            <div class="switch-desc">Display the number of unloaded tabs on the extension toolbar icon.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="show-badge" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <div class="switch-title">Fallback Pause Mode</div>
+            <div class="switch-desc">Enable lightweight pause mode if browser cannot directly unload tabs.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="fallback-enabled" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div class="switch-info">
+            <div class="switch-title">Always Pause Current Tab In-Place</div>
+            <div class="switch-desc">When manually unloading the active tab, suspend it in-place instead of switching tabs (prevents waking up other tabs).</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="always-pause-in-place">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Section: Per-Tab Overrides Guide -->
+      <section class="settings-card" id="pertab">
+        <h2>Per-Tab Custom Controls</h2>
+        <p class="card-desc">Fine-grained control over individual tabs directly from the extension popup or context menu:</p>
+
+        <div class="info-callout" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px;">
+          <div style="font-weight: 600; margin-bottom: 4px; color: var(--primary);">⏱ Fixed Inactivity Timer per Tab</div>
+          <div style="font-size: 13px; color: var(--text-muted);">
+            Open the SaveMyTab popup on any active tab and pick a fixed duration (1m, 5m, 10m, 30m, 1h, or custom minutes). That specific tab will follow its own timer instead of the global default.
+          </div>
+        </div>
+
+        <div class="info-callout" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 14px 16px;">
+          <div style="font-weight: 600; margin-bottom: 4px; color: var(--success);">🛡 Per-Tab Suspension Lock</div>
+          <div style="font-size: 13px; color: var(--text-muted);">
+            Toggle <strong>"Exclude this tab"</strong> in the popup or right-click the page and select <strong>"Toggle Exclude this tab from suspension"</strong>. This prevents that individual tab from ever being unloaded, even if you never pin it.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Whitelist -->
+      <section class="settings-card" id="whitelist">
+        <h2>Domain Whitelist</h2>
+        <p class="card-desc">Tabs from these domains will never be unloaded automatically.</p>
+
+        <div class="whitelist-input-group">
+          <input type="text" id="new-whitelist-input" placeholder="e.g. github.com, notion.so">
+          <button type="button" class="btn btn-primary" id="add-whitelist-btn">Add Domain</button>
+        </div>
+
+        <div class="whitelist-tags" id="whitelist-tags">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="whitelist-suggestions">
+          <span class="suggestions-label">Quick suggestions:</span>
+          <button type="button" class="chip" data-domain="github.com">+ github.com</button>
+          <button type="button" class="chip" data-domain="notion.so">+ notion.so</button>
+          <button type="button" class="chip" data-domain="reddit.com">+ reddit.com</button>
+          <button type="button" class="chip" data-domain="figma.com">+ figma.com</button>
+        </div>
+      </section>
+
+      <!-- Section: Lifetime RAM Statistics -->
+      <section class="settings-card" id="diagnostics">
+        <h2>Lifetime RAM Statistics</h2>
+        <p class="card-desc">Cumulative memory savings and open tab status.</p>
+
+        <div class="stats-summary-grid">
+          <div class="summary-box">
+            <div class="num" id="total-unloaded-count">0</div>
+            <div class="lbl">Lifetime Tabs Unloaded</div>
+          </div>
+          <div class="summary-box">
+            <div class="num" id="total-ram-saved">0 MB</div>
+            <div class="lbl">Estimated Total RAM Saved</div>
+          </div>
+        </div>
+
+        <!-- Single simple note -->
+        <div class="engine-simple-note" id="engine-note">
+          <span class="note-dot" id="engine-dot">●</span>
+          <span id="engine-note-text">Checking browser engine...</span>
+        </div>
+
+        <div class="reset-stats-row">
+          <button type="button" class="btn btn-outline" id="reset-stats-btn">Reset Statistics Counter</button>
+        </div>
+      </section>
+
+      <!-- Save Bar -->
+      <div class="save-bar">
+        <button type="button" class="btn btn-primary" id="save-all-btn">Save All Changes</button>
+        <span class="save-status" id="save-status"></span>
+      </div>
+    </main>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

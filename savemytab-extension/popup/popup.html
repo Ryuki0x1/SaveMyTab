@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaveMyTab</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4v10h16V8H4zm6 2h4v2h-4v-2zm0 4h4v2h-4v-2z"/>
+          </svg>
+        </div>
+        <span class="brand-title">SaveMyTab</span>
+      </div>
+      <a href="#" id="open-options-btn" class="settings-link" title="Open Settings">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
+    </header>
+
+    <!-- RAM & Tab Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="discarded-stat">0</div>
+        <div class="stat-label">Tabs Unloaded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="ram-stat">0 MB</div>
+        <div class="stat-label">Est. RAM Freed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="active-stat">0</div>
+        <div class="stat-label">Total Tabs</div>
+      </div>
+    </div>
+
+    <!-- Current Tab Controls Card -->
+    <div class="current-tab-section">
+      <div class="section-title">Current Tab Controls</div>
+      <div class="current-tab-card">
+        <!-- Title & Domain Row -->
+        <div class="tab-header-row">
+          <div class="tab-info">
+            <div class="tab-title" id="current-tab-title">Loading...</div>
+            <div class="tab-domain" id="current-tab-domain">---</div>
+          </div>
+          <button id="toggle-whitelist-btn" class="whitelist-btn" title="Toggle domain whitelist">
+            Whitelist
+          </button>
+        </div>
+
+        <!-- Exclude This Tab Toggle -->
+        <div class="tab-control-row">
+          <div class="control-label-group">
+            <span class="control-icon">🛡️</span>
+            <div>
+              <div class="control-title">Exclude this tab</div>
+              <div class="control-subtitle">Never suspend this tab from inactivity</div>
+            </div>
+          </div>
+          <label class="toggle-switch-sm" title="Exclude this tab from being suspended">
+            <input type="checkbox" id="exclude-tab-toggle">
+            <span class="slider-sm"></span>
+          </label>
+        </div>
+
+        <!-- Fixed Timer for This Tab -->
+        <div class="tab-control-row" id="tab-timer-control-row">
+          <div class="control-label-group">
+            <span class="control-icon">⏱️</span>
+            <div>
+              <div class="control-title">Tab Inactivity Timer</div>
+              <div class="control-subtitle" id="tab-timer-status-text">Using Global Default</div>
+            </div>
+          </div>
+          <div class="timer-picker-group">
+            <select id="tab-timer-select" class="tab-select" title="Set inactivity timer for this tab">
+              <option value="default">Global Default</option>
+              <option value="1">1 min</option>
+              <option value="5">5 min</option>
+              <option value="10">10 min</option>
+              <option value="15">15 min</option>
+              <option value="30">30 min</option>
+              <option value="60">1 hour</option>
+              <option value="120">2 hours</option>
+              <option value="custom">Custom...</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Custom minutes input container -->
+        <div id="custom-minutes-container" class="custom-minutes-container hidden">
+          <input type="number" id="tab-custom-minutes-input" min="1" max="1440" placeholder="e.g. 20">
+          <span class="mins-unit">min</span>
+          <button id="apply-custom-timer-btn" class="btn-apply-sm">Set</button>
+        </div>
+
+        <!-- Tab Excluded Notice Badge -->
+        <div id="tab-excluded-notice" class="tab-excluded-notice hidden">
+          <span>🔒</span> Tab protected &amp; excluded from suspension
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Action Controls -->
+    <div class="actions-section">
+      <button id="unload-inactive-btn" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        Unload Inactive Tabs Now
+      </button>
+
+      <div class="btn-row">
+        <button id="unload-current-btn" class="btn btn-secondary">
+          Unload This Tab
+        </button>
+        <button id="unload-others-btn" class="btn btn-secondary">
+          Unload Others
+        </button>
+      </div>
+
+      <button id="wake-all-btn" class="btn btn-outline">
+        Wake All Suspended Tabs
+      </button>
+    </div>
+
+    <!-- Status Footer -->
+    <footer class="footer">
+      <span id="timer-status">Global Timeout: 15m idle</span>
+      <span id="feedback-msg" class="feedback-msg"></span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
