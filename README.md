@@ -152,6 +152,14 @@ savemytab-extension/
 
 ---
 
+## Show it some love ⭐
+
+If SaveMyTab frees up RAM for you, please **star this repo**, or **fork it and
+showcase your setup** — every star, fork, and issue report helps other people
+find a quieter browser.
+
+---
+
 ## License
 
 Open source under the MIT License.
