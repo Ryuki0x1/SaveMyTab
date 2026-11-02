@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+html,body { width:1280px; height:640px; background:#0d1424; color:#fff; overflow:hidden; }
+body { display:flex; align-items:center; justify-content:space-between; padding:0 72px; }
+.left { max-width:520px; }
+.logo-row { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.logo { width:64px; height:64px; border-radius:16px; background:linear-gradient(135deg,#3b82f6,#1d4ed8); display:flex; align-items:center; justify-content:center; font-size:34px; }
+h1 { font-size:64px; font-weight:800; letter-spacing:-1px; }
+h1 span { color:#3b82f6; }
+.sub { font-size:26px; color:#9fb2d8; margin-top:10px; font-weight:500; }
+.sub b { color:#fff; }
+.chips { display:flex; gap:14px; margin-top:34px; }
+.chip { background:#131c33; border:1px solid #233557; border-radius:12px; padding:14px 22px; }
+.chip .n { font-size:30px; font-weight:800; color:#3b82f6; }
+.chip .l { font-size:14px; color:#7d92bc; margin-top:2px; letter-spacing:0.6px; }
+.foot { margin-top:40px; font-size:15px; color:#5f7197; letter-spacing:0.5px; }
+/* right: browser mock */
+.win { width:560px; background:#101a30; border:1px solid #24365c; border-radius:18px; box-shadow:0 30px 70px rgba(0,0,0,.55); overflow:hidden; }
+.wtop { display:flex; align-items:center; gap:8px; background:#0b1326; padding:14px 18px; }
+.dot { width:12px; height:12px; border-radius:50%; }
+.d1 { background:#ff5f57; } .d2 { background:#febc2e; } .d3 { background:#28c840; }
+.tabs { display:flex; gap:10px; padding:18px; }
+.tab { flex:1; height:130px; border-radius:12px; background:#0c1428; border:1.5px solid #1f2f52; position:relative; display:flex; align-items:flex-end; justify-content:center; padding-bottom:12px; }
+.tab .favicon { width:34px; height:34px; border-radius:8px; position:absolute; top:16px; left:16px; opacity:.5; }
+.tab .zzz { position:absolute; top:12px; right:14px; font-size:16px; opacity:.75; }
+.t1 { background:linear-gradient(135deg,#3b82f6,#1e40af); border-color:#3b82f6; box-shadow:0 0 28px rgba(59,130,246,.45); }
+.t1 .zzz, .t1 .favicon { opacity:1; }
+.badge { position:absolute; top:-14px; left:24px; background:#22c55e; color:#052e16; font-size:13px; font-weight:800; padding:5px 12px; border-radius:20px; }
+</style></head>
+<body>
+  <div class="left">
+    <div class="logo-row"><div class="logo">💾</div><h1>Save<span>MyTab</span></h1></div>
+    <div class="sub"><b>Sleep your tabs.</b> Free your RAM.</div>
+    <div class="chips">
+      <div class="chip"><div class="n">12</div><div class="l">TABS UNLOADED</div></div>
+      <div class="chip"><div class="n">1.9&nbsp;GB</div><div class="l">RAM FREED</div></div>
+      <div class="chip"><div class="n">⚡</div><div class="l">ONE CLICK</div></div>
+    </div>
+    <div class="foot">Chrome · Firefox · Edge · Brave — Manifest V3, open source</div>
+  </div>
+  <div class="win">
+    <div class="wtop"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div>
+    <div class="tabs">
+      <div class="tab t1"><div class="favicon" style="background:#60a5fa"></div><span style="color:#dbe9ff;font-size:12px;">github.com</span></div>
+      <div class="tab"><div class="zzz">💤</div><div class="favicon" style="background:#475569"></div><span></span></div>
+      <div class="tab"><div class="zzz">💤</div><div class="favicon" style="background:#475569"></div></div>
+      <div class="tab"><div class="zzz">💤</div><div class="favicon" style="background:#475569"></div></div>
+    </div>
+    <div style="position:relative"><div class="badge">AUTO-SUSPEND ON</div>
+    <div style="height:64px;background:#0b1326;border-top:1px solid #1c2b4d;display:flex;align-items:center;justify-content:center;color:#7d92bc;font-size:15px;">SaveMyTab · Automatic Inactivity Timer</div></div>
+  </div>
+</body></html>
