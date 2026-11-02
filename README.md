@@ -6,6 +6,8 @@
 
 An open-source, high-efficiency WebExtension (Manifest V3) that intelligently unloads inactive tabs to drastically reduce your browser's memory footprint — using native memory-discard APIs with a zero-RAM pause fallback, without disrupting your workflow.
 
+A modern, cleaner take on tab suspension for **Chrome, Firefox, Edge and Brave** — the auto-tab-discard workflow people know, rebuilt and maintained for Manifest V3. No telemetry, no tracking, 100% local.
+
 ![SaveMyTab Toolbar Popup](docs/screenshots/hero-popup.png)
 
 **Chrome · Firefox · Edge · Brave · Opera · Safari**
